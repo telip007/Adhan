@@ -95,6 +95,12 @@ public struct CalculationParameters {
         self.method = method
     }
     
+    init(fajrAngle: Double, ishaAngle: Double, adjustments: PrayerAdjustments,method: CalculationMethod) {
+        self.init(fajrAngle: fajrAngle, ishaAngle: ishaAngle)
+        self.method = method
+        self.adjustments = adjustments
+    }
+    
     init(fajrAngle: Double, ishaInterval: Int, method: CalculationMethod) {
         self.init(fajrAngle: fajrAngle, ishaInterval: ishaInterval)
         self.method = method
@@ -130,6 +136,9 @@ public enum CalculationMethod {
     // The Gulf Region
     case Gulf
     
+    // Diyanet İşleri Başkanlığı
+    case Diyanet
+    
     // Moonsighting Committee
     case MoonsightingCommittee
     
@@ -157,6 +166,8 @@ public enum CalculationMethod {
             return CalculationParameters(fajrAngle: 18.5, ishaInterval: 90, method: self)
         case .Gulf:
             return CalculationParameters(fajrAngle: 19.5, ishaInterval: 90, method: self)
+        case .Diyanet:
+            return CalculationParameters(fajrAngle: 18, ishaAngle: 17, adjustments: PrayerAdjustments(fajr: -2, sunrise: -6, dhuhr: 7, asr: 4, maghrib: 7, isha: 1), method: self)
         case .MoonsightingCommittee:
             return CalculationParameters(fajrAngle: 18, ishaAngle: 18, method: self)
         case .NorthAmerica:
